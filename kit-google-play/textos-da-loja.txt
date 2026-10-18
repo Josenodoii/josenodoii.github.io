@@ -1,0 +1,85 @@
+DEVENDO ATÉ AS CALÇAS — textos para a Google Play
+==================================================
+
+NOME DO APP (máx. 30 caracteres)
+Devendo Até as Calças
+
+DESCRIÇÃO CURTA (máx. 80 caracteres)
+Pague a dívida de R$ 1 milhão do tio catando moedas. Comédia em pixel art!
+
+DESCRIÇÃO COMPLETA
+Seu tio Osvaldo pegou R$ 1 milhão emprestado para apostar em tartarugas de corrida. As tartarugas não correram, o tio fugiu para uma ilha "para pensar na vida" e a dívida, por um erro de cartório, ficou no SEU nome.
+
+Agora é com você: ande pelo quintal, pule, pegue moedas e pague o elegante (e assustador) Sr. Valdemar, que acompanha cada centavo de monóculo no olho.
+
+★ CATE MOEDAS
+Ande e pule para pegar moedas no chão e no ar. Pegue várias seguidas para fazer combos, cace as raras moedas douradas e aproveite a chuva de moedas.
+
+★ MONTE SUA EQUIPE
+Contrate ajudantes que trabalham por você, até com o jogo fechado: o Pipoca (que às vezes rouba suas moedas!), a Vó Dirce e seu bolo de fubá, o Primo Jeferson e suas selfies, o Pombo Entregador, o Robô, a Barraca de Pastel, a Fábrica de Botões e as Tartarugas de Corrida.
+
+★ UM QUINTAL CHEIO DE VIDA
+Coma o bolo da vó para correr mais rápido, tire selfies com o Jeferson e desafie a tartaruga para uma corrida. Quando anoitece, as lanternas acendem e as moedas brilham valendo o dobro.
+
+★ MISSÕES, CONQUISTAS E ESTILO
+Complete missões todos os dias, desbloqueie mais de 20 conquistas e deixe o personagem com estilo: boné, chapéu de palha, óculos escuros, cartola e até coroa.
+
+★ A DÍVIDA NUNCA ACABA (DE VERDADE)
+Pagou? Parabéns! Só que o tio pegou mais um empréstimo… No Novo Jogo+ a dívida fica dez vezes maior e você viaja para novos lugares: a Fazenda de Lhamas, a Praia Grande e a Vila.
+
+• Visual em pixel art e música 8-bit
+• Jogável com uma mão, na vertical
+• Sem anúncios, sem compras dentro do app e sem coleta de dados
+• Funciona sem internet depois de instalado
+
+CATEGORIA
+Jogos › Casual
+
+TAGS SUGERIDAS
+Casual, Pixel art, Comédia, Jogo incremental, Offline
+
+E-MAIL DE CONTATO
+jeanebraga09@outlook.com
+
+POLÍTICA DE PRIVACIDADE (depois de publicar o pacote no Netlify)
+https://devendoateascalcas.netlify.app/privacidade.html
+
+
+GUIA DE PREENCHIMENTO NO PLAY CONSOLE
+======================================
+
+1) Recursos gráficos (Página principal da loja)
+   - Ícone do app: icone-512.png (512×512)
+   - Imagem de destaque: imagem-de-destaque-1024x500.png
+   - Capturas de tela do telefone: captura-1 a captura-6 (1080×1920)
+
+2) Classificação do conteúdo (questionário IARC)
+   Respostas que descrevem o jogo como ele é hoje:
+   - Categoria: Jogo
+   - Violência: não
+   - Medo / terror: não
+   - Conteúdo sexual ou nudez: não
+   - Linguagem imprópria: não
+   - Drogas, álcool ou tabaco: não
+   - Apostas: não há apostas nem prêmios reais. (A história cita que o tio apostou em
+     corridas de tartaruga, mas o jogador não aposta nada.)
+   - Interação entre usuários / chat: não
+   - Compartilha localização: não
+   - Compras digitais: não
+   Resultado esperado: classificação livre ou bem baixa. Quem define é o questionário.
+
+3) Segurança dos dados
+   - O app coleta ou compartilha dados do usuário? NÃO.
+   - Os dados ficam salvos apenas no aparelho, e isso não conta como coleta.
+
+4) Público-alvo e conteúdo
+   - Se você marcar faixas de idade abaixo de 13 anos, o app entra no programa
+     "Famílias" da Google, que tem regras e revisão extras. O jogo já atende ao
+     principal (sem anúncios e sem coleta de dados), mas a revisão pode demorar mais.
+   - Marcar "13 anos ou mais" deixa o processo mais simples.
+
+5) Anúncios: o app NÃO contém anúncios.
+
+6) Teste fechado (obrigatório para contas pessoais novas)
+   - Mínimo de 12 testadores inscritos por 14 dias seguidos.
+   - Depois disso, peça o acesso de produção no Play Console.

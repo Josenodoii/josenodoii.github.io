@@ -1,0 +1,40 @@
+DEVENDO ATÉ AS CALÇAS — como jogar, publicar e instalar
+=======================================================
+
+JOGAR NO COMPUTADOR
+- Abra o arquivo index.html no navegador (Chrome, Edge ou Firefox).
+- Setas ou A/D para andar, seta para cima / W / espaço para pular.
+
+ATUALIZAR O SITE NO NETLIFY
+1. Entre em app.netlify.com com a sua conta e abra o site do jogo.
+2. Na aba "Deploys", arraste este .zip inteiro (não precisa descompactar).
+3. Em alguns segundos o site é atualizado. A política de privacidade fica em:
+   https://SEU-SITE.netlify.app/privacidade.html
+
+INSTALAR NO CELULAR COMO APLICATIVO
+- Abra o link do Netlify no celular.
+- Android (Chrome): menu ⋮ > "Instalar app".
+- iPhone (Safari): Compartilhar > "Adicionar à Tela de Início".
+- Se já tinha instalado antes, apague o atalho antigo primeiro.
+
+GERAR O APP PARA A GOOGLE PLAY (PWABuilder)
+1. Entre em pwabuilder.com, cole o link do Netlify e analise.
+2. Escolha Android > Generate Package. Guarde muito bem a chave de assinatura (signing key).
+3. O pacote traz um arquivo assetlinks.json: coloque-o numa pasta ".well-known"
+   dentro do site e publique de novo (assim o app abre sem a barra do navegador).
+
+PUBLICAR NA GOOGLE PLAY
+- A pasta "kit-google-play" tem o ícone, a imagem de destaque, 6 capturas de tela
+  e o arquivo textos-da-loja.txt com nome, descrições e um guia de preenchimento.
+
+PUBLICAR NO ITCH.IO (opcional)
+1. itch.io > "Upload new project" > Kind of project: HTML.
+2. Envie este .zip, marque "This file will be played in the browser".
+3. Embed: 405 x 720, "Mobile friendly" (Portrait) e "Fullscreen button".
+
+ARQUIVOS
+- index.html ............. o jogo
+- privacidade.html ....... política de privacidade
+- img/ ................... cenários, personagens, folha de animação e ícones
+- manifest.json, sw.js ... deixam o jogo instalável e funcionando sem internet
+- kit-google-play/ ....... materiais para a página da loja

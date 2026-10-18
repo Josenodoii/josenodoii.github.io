@@ -1,0 +1,42 @@
+{
+  "name": "Devendo Até as Calças",
+  "short_name": "Devendo",
+  "description": "Pague a dívida de R$ 1 milhão do Tio Osvaldo catando moedas no pátio.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#2a1a0e",
+  "theme_color": "#2a1a0e",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "img/icone-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icone-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/icone-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "img/icone-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "display_override": [
+    "fullscreen",
+    "standalone"
+  ]
+}
