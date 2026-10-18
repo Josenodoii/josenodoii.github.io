@@ -65,7 +65,8 @@ jobs:
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
         run: |
-          echo "$KEYSTORE_BASE64" | tr -d ' \r\n' | base64 -d > android/signing.keystore
+          echo "$KEYSTORE_BASE64" | tr -cd 'A-Za-z0-9+/=' > chave.txt
+          echo "Tamanho da chave: $(wc -c < chave.txt) (deve ser 3656)"; base64 -d chave.txt > android/signing.keystore
           echo "Impressao digital da chave (deve terminar em ...7B:A2:E9):"
           keytool -list -v -keystore android/signing.keystore -storepass "${{ secrets.KEYSTORE_PASSWORD }}" | grep SHA256
 
