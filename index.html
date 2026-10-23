@@ -74,8 +74,8 @@ button{font:inherit}
 .avatar img{width:100%;height:100%;object-fit:cover;image-rendering:pixelated}
 
 /* controles de baixo */
-.controls{position:absolute;left:0;right:0;bottom:0;padding:0 max(10px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px));display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:8px;align-items:center;z-index:5}
-.pad{font-family:var(--display);font-size:16px;line-height:1;width:56px;height:52px;border:3px solid var(--line);background:rgba(255,255,255,.92);color:var(--ink);box-shadow:3px 3px 0 var(--line);cursor:pointer;touch-action:none;-webkit-tap-highlight-color:transparent;padding:0}
+.controls{position:absolute;left:0;right:0;bottom:0;padding:0 max(30px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(30px,env(safe-area-inset-left,0px));touch-action:none;display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:8px;align-items:center;z-index:5}
+.pad{font-family:var(--display);font-size:16px;line-height:1;width:56px;height:52px;border:3px solid var(--line);background:rgba(255,255,255,.92);color:var(--ink);box-shadow:3px 3px 0 var(--line);cursor:pointer;touch-action:none;-webkit-tap-highlight-color:transparent;padding:0;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .pad.jump{width:auto;padding:0 12px;font-size:10px;background:var(--gold)}
 .pad.on,.pad:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--line);background:var(--note)}
 .pad.jump.on,.pad.jump:active{background:var(--gold-dk)}
@@ -173,6 +173,34 @@ button{font:inherit}
 .danger{border-top:3px dashed #d6c8c8;padding-top:12px;display:grid;gap:8px}
 .danger p{margin:0;font-size:14px;font-weight:700;color:var(--red)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.row3 .btn{padding:6px 4px;font-size:13px}
+.btn.sel{background:var(--gold)}
+/* objetivo na tela (pedido do Valdemar, lanterna) */
+.objective{position:absolute;left:50%;bottom:calc(78px + env(safe-area-inset-bottom,0px));translate:-50% 0;z-index:6;background:#fff;border:3px solid var(--line);box-shadow:3px 3px 0 var(--line);padding:5px 10px;font-family:var(--display);font-size:9px;line-height:1.6;white-space:nowrap;pointer-events:none}
+.objective.hurry{background:var(--note);animation:blink .5s steps(2) infinite}
+.warn{position:absolute;z-index:6;bottom:calc(150px + env(safe-area-inset-bottom,0px));font-family:var(--display);font-size:9px;background:var(--red);color:#fff;border:3px solid var(--line);padding:4px 6px;pointer-events:none;animation:blink .4s steps(2) infinite}
+/* minijogos */
+.gcard{border:3px solid var(--line);background:#fff;padding:8px;display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;align-items:center}
+.gcard img{width:44px;height:44px;object-fit:contain;image-rendering:pixelated}
+.gcard .nm{font-weight:800}
+.gcard .ds{font-size:13px;color:var(--muted);line-height:1.3}
+.gcard .btn{grid-column:1/-1;padding:7px 10px}
+.track{border:3px solid var(--line);background:#c9e7a6;position:relative;display:grid;gap:2px;padding:4px 26px 4px 4px;overflow:hidden}
+.track::after{content:"";position:absolute;right:10px;top:0;bottom:0;width:8px;background:repeating-linear-gradient(#1c1410 0 6px,#fff 6px 12px)}
+.lane{height:34px;position:relative;border-bottom:2px dashed rgba(28,42,34,.25);display:flex;align-items:center}
+.lane:last-child{border-bottom:0}
+.lane .ln{font-family:var(--display);font-size:8px;width:14px;flex:none}
+.lane img{height:26px;image-rendering:pixelated;will-change:transform}
+.race-count{font-family:var(--display);font-size:20px;min-height:26px;color:var(--green-dk)}
+/* baú do dia */
+.streak{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.streak div{border:2px solid var(--line);background:#fff;font-size:10px;font-weight:800;padding:3px 0;line-height:1.3}
+.streak div.done{background:var(--green);color:#fff}
+.streak div.now{background:var(--gold);animation:pulse .7s steps(2) infinite}
+.chestbig img{width:72px;height:72px;image-rendering:pixelated}
+.chestbig.shake img{animation:shake .12s steps(2) 4}
+@keyframes shake{50%{transform:rotate(-12deg) scale(1.1)}}
 
 /* cartão-postal */
 #postcard{position:absolute;left:10px;right:62px;top:calc(96px + env(safe-area-inset-top,0px));background:#fff;border:3px solid var(--line);box-shadow:4px 4px 0 var(--line);padding:8px 10px;display:flex;gap:10px;z-index:8;animation:pop .3s steps(3)}
@@ -225,6 +253,7 @@ button{font:inherit}
     <div class="hud-actions">
       <button class="shop-btn" id="shopBtn" aria-label="Abrir loja"><span class="badge" id="shopBadge" hidden>!</span></button>
       <button class="hud-btn" id="missionsBtn" aria-label="Missões do dia"><span class="badge" id="mBadge" hidden>!</span></button>
+      <button class="hud-btn" id="gamesBtn" aria-label="Minijogos"><span class="badge" id="gBadge" hidden>!</span></button>
       <button class="hud-btn" id="achBtn" aria-label="Conquistas"></button>
       <button class="hud-btn" id="settingsBtn" aria-label="Configurações"></button>
     </div>
@@ -243,6 +272,8 @@ button{font:inherit}
   <div class="buff" id="buff" hidden></div>
   <div class="event-banner" id="eventBanner" hidden>CHUVA DE MOEDAS!</div>
   <div class="stage-hint" id="stageHint" hidden></div>
+  <div class="objective" id="objective" hidden></div>
+  <div class="warn" id="warn" hidden></div>
   <div class="toast" id="toast" hidden></div>
 
   <div class="controls">
@@ -274,6 +305,12 @@ button{font:inherit}
     <div class="sheet-head"><h2>Missões do dia</h2><button class="close" aria-label="Fechar">X</button></div>
     <div class="shopscroll"><div class="mlist" id="mlist"></div></div>
     <div class="foot"><span id="mReset"></span><span id="mDone"></span></div>
+  </section>
+
+  <section class="sheet" id="gamesSheet" role="dialog" aria-label="Minijogos" hidden>
+    <div class="sheet-head"><h2>Minijogos</h2><button class="close" aria-label="Fechar">X</button></div>
+    <div class="shopscroll"><div class="mlist" id="glist"></div></div>
+    <div class="foot"><span>Cada minijogo pode ser jogado a cada 2 minutos.</span></div>
   </section>
 
   <section class="sheet" id="achSheet" role="dialog" aria-label="Conquistas" hidden>
@@ -322,6 +359,27 @@ button{font:inherit}
     </div>
   </div>
   <div id="postcard" hidden></div>
+  <div class="modal" id="raceModal" hidden>
+    <div class="box">
+      <h2>Corrida de Tartarugas</h2>
+      <div class="track" id="track"></div>
+      <div class="race-count" id="raceCount"></div>
+      <p id="raceMsg"></p>
+      <div class="row3" id="racePick"></div>
+      <div class="row3" id="raceBet"></div>
+      <button class="btn pay" id="raceGo">Apostar e largar!</button>
+      <button class="btn" id="raceClose">Sair</button>
+    </div>
+  </div>
+  <div class="modal" id="chest" hidden>
+    <div class="box">
+      <h2 id="chestTitle">Baú do dia</h2>
+      <div class="streak" id="streakRow"></div>
+      <div class="chestbig" id="chestIcon"></div>
+      <p id="chestText"></p>
+      <button class="btn pay" id="chestBtn">Abrir o baú</button>
+    </div>
+  </div>
   <div class="modal" id="ending" hidden></div>
 </div>
 
@@ -436,6 +494,9 @@ const MISSIONS = {
   cakes:   { t:()=>"Coma o bolo da Vó Dirce", n:()=>1, need:"vo" },
   photos:  { t:()=>"Tire uma selfie com o Primo Jeferson", n:()=>1, need:"jeferson" },
   races:   { t:()=>"Vença uma corrida da tartaruga", n:()=>1, need:"tartaruga" },
+  toto:    { t:n=>n>1 ? `Pule por cima do Totó ${n} vezes` : "Pule por cima do Totó do vizinho", n:()=>pick([1,2,3]) },
+  pedido:  { t:()=>"Cumpra um pedido do Sr. Valdemar", n:()=>1 },
+  mini:    { t:n=>n>1 ? `Jogue ${n} minijogos` : "Jogue um minijogo", n:()=>pick([1,2]) },
 };
 // ---------- CONQUISTAS ----------
 const ACHS = [
@@ -461,17 +522,23 @@ const ACHS = [
   { id:"estilo",   e:"🎩", n:"Com estilo",        d:"Compre um item de visual.",            ok:()=>Object.keys(S.cos.owned).length>0 },
   { id:"missoes",  e:"📋", n:"Trabalhador",       d:"Complete 10 missões do dia.",          ok:()=>S.life.missions>=10 },
   { id:"ngplus",   e:"🦙", n:"De novo não…",      d:"Comece o Novo Jogo+.",                 ok:()=>S.ng>0 },
+  { id:"toto",     e:"🐕", n:"Pula-pula",         d:"Pule por cima do Totó 5 vezes.",       ok:()=>S.life.dodges>=5 },
+  { id:"pedido",   e:"📦", n:"Entrega expressa",  d:"Cumpra um pedido do Sr. Valdemar.",    ok:()=>S.life.reqs>=1 },
+  { id:"aposta",   e:"🐢", n:"Igualzinho ao tio", d:"Ganhe uma aposta na corrida.",         ok:()=>S.life.betWins>=1 },
+  { id:"lanterna", e:"🔦", n:"Olhos de gato",     d:"Pegue 15 moedas na Caça no escuro.",   ok:()=>S.life.lampBest>=15 },
+  { id:"fiel",     e:"🎁", n:"Freguês fiel",      d:"Abra o baú 7 dias seguidos.",          ok:()=>S.life.streakBest>=7 },
 ];
 
 // ================= ESTADO =================
 const START_DEBT = 1000000;
-const LIFE0 = {coins:0,gold:0,dogBack:0,missions:0,photos:0,races:0,cakes:0,night:0,maxCombo:0,rainBest:0,osvaldo:0};
+const LIFE0 = {coins:0,gold:0,dogBack:0,missions:0,photos:0,races:0,cakes:0,night:0,maxCombo:0,rainBest:0,osvaldo:0,dodges:0,reqs:0,betWins:0,lampBest:0,streakBest:0,minis:0};
 function randPost(){ return 70 + Math.random()*60; }
 function freshState(ng=0, keep=null){
   const k = keep || {};
   return { money:0, paid:0, debt:START_DEBT*Math.pow(10,ng), ng, clicks:0, lv:{}, noteIdx:0, nextPostcard:randPost(), ended:false, osvaldoDone:false,
     ach:k.ach||{}, life:Object.assign({},LIFE0,k.life||{}), cos:k.cos||{owned:{},hat:null,glasses:false},
-    tut:(k.tut!==undefined ? k.tut : 0), daily:k.daily||null, vol:k.vol||{music:60,sfx:80}, lastSeen:Date.now() };
+    tut:(k.tut!==undefined ? k.tut : 0), daily:k.daily||null, vol:k.vol||{music:60,sfx:80}, lastSeen:Date.now(),
+    streak:k.streak||{last:"",n:0}, mini:k.mini||{raceAt:0,lampAt:0} };
 }
 function load(){
   try{
@@ -644,7 +711,7 @@ function updateLook(){
 }
 
 // ================= GAVETAS =================
-const PANELS = ["sheet","missionsSheet","achSheet","settingsSheet"];
+const PANELS = ["sheet","missionsSheet","gamesSheet","achSheet","settingsSheet"];
 let openId = null;
 function openPanel(id){
   PANELS.forEach(p=>{ $(p).hidden = p!==id; });
@@ -654,6 +721,7 @@ function openPanel(id){
     if(id==="missionsSheet") renderMissions();
     if(id==="achSheet") renderAch();
     if(id==="settingsSheet") renderSettings();
+    if(id==="gamesSheet") renderGames();
     const c = $(id).querySelector(".close"); if(c) c.focus();
     tutOnPanel(id);
   }
@@ -664,6 +732,8 @@ $("sheetBackdrop").addEventListener("click",()=>openPanel(null));
 document.addEventListener("keydown",e=>{ if(e.key==="Escape" && openId) openPanel(null); });
 $("shopBtn").prepend(pixelCoin());
 $("missionsBtn").prepend(emojiImg("📋"));
+$("gamesBtn").prepend(emojiImg("🎮"));
+$("gamesBtn").addEventListener("click",()=>openPanel("gamesSheet"));
 $("achBtn").appendChild(emojiImg("🏅"));
 $("settingsBtn").appendChild(emojiImg("⚙️"));
 $("shopBtn").addEventListener("click",()=>openPanel("sheet"));
@@ -848,7 +918,7 @@ function offlineCheck(since){
 }
 $("offBtn").addEventListener("click",()=>{
   S.money += offlineValue; offlineValue = 0; $("offline").hidden = true;
-  Sound.play("gold"); render(); save();
+  Sound.play("gold"); render(); save(); setTimeout(maybeChest, 500);
 });
 document.addEventListener("visibilitychange",()=>{
   if(document.hidden){ save(); awaySince = Date.now(); }
@@ -856,26 +926,35 @@ document.addEventListener("visibilitychange",()=>{
 });
 
 // ================= RENDER E LOOP =================
+const domCache = {};
+function setT(id, v){ v = String(v); if(domCache[id]!==v){ domCache[id] = v; $(id).textContent = v; } }
+function setH(id, h){ const k = id+"#h"; if(domCache[k]!==h){ domCache[k] = h; $(id).hidden = h; } }
 function render(){
-  $("money").textContent = fmtShort(Math.floor(S.money));
-  $("perClick").textContent = fmtShort(coinValue());
-  $("perSec").textContent = fmtShort(perSec());
-  $("paid").textContent = fmtShort(Math.floor(S.paid));
-  $("remain").textContent = fmtShort(Math.ceil(remaining()));
-  const pct = Math.min(100, S.paid/S.debt*100);
-  $("bar").style.width = pct+"%"; $("barwrap").setAttribute("aria-valuenow", pct.toFixed(1));
-  $("payBtn").disabled = S.money < 1;
-  $("payBtn").textContent = S.money>=1 ? `Pagar ${fmt(Math.floor(Math.min(S.money,remaining())))}` : "Pagar o Sr. Valdemar";
-  $("clicksInfo").textContent = S.clicks.toLocaleString("pt-BR")+" moedas pegas";
-  $("roundInfo").textContent = S.ng ? `Rodada ${S.ng+1}` : "";
-  const can = [...CLICK_UPS,...HELPERS].filter(i=>S.money>=price(i)).length;
-  $("shopBadge").hidden = !can; $("shopBadge").textContent = can;
-  $("shopBtn").classList.toggle("pulse", can>0 && !openId);
+  setT("money", fmtShort(Math.floor(S.money)));
+  setT("perClick", fmtShort(coinValue()));
+  setT("perSec", fmtShort(perSec()));
+  setT("paid", fmtShort(Math.floor(S.paid)));
+  setT("remain", fmtShort(Math.ceil(remaining())));
+  const pct = Math.min(100, S.paid/S.debt*100), pw = pct.toFixed(2)+"%";
+  if(domCache.bar!==pw){ domCache.bar = pw; $("bar").style.width = pw; $("barwrap").setAttribute("aria-valuenow", pct.toFixed(1)); }
+  const shopOpen = openId==="sheet";
+  if(shopOpen){
+    $("payBtn").disabled = S.money < 1;
+    setT("payBtn", S.money>=1 ? `Pagar ${fmt(Math.floor(Math.min(S.money,remaining())))}` : "Pagar o Sr. Valdemar");
+    setT("clicksInfo", S.clicks.toLocaleString("pt-BR")+" moedas pegas");
+    setT("roundInfo", S.ng ? `Rodada ${S.ng+1}` : "");
+  }
+  let can = 0; for(const i of CLICK_UPS) if(S.money>=price(i)) can++; for(const i of HELPERS) if(S.money>=price(i)) can++;
+  setH("shopBadge", !can); setT("shopBadge", can);
+  const sp = can>0 && !openId; if(domCache.sp!==sp){ domCache.sp = sp; $("shopBtn").classList.toggle("pulse", sp); }
   const ready = S.daily ? S.daily.list.filter(m=>m.done && !m.claimed).length : 0;
-  $("mBadge").hidden = !ready; $("mBadge").textContent = ready;
-  $("missionsBtn").classList.toggle("pulse", ready>0 && !openId);
-  $("buff").hidden = !(buff.t>0); if(buff.t>0) $("buff").textContent = `🍰 RÁPIDO ${Math.ceil(buff.t)}s`;
-  updateShop(CLICK_UPS); updateShop(HELPERS); updateLook();
+  setH("mBadge", !ready); setT("mBadge", ready);
+  const mp = ready>0 && !openId; if(domCache.mp!==mp){ domCache.mp = mp; $("missionsBtn").classList.toggle("pulse", mp); }
+  setH("buff", !(buff.t>0)); if(buff.t>0) setT("buff", `🍰 RÁPIDO ${Math.ceil(buff.t)}s`);
+  const gReady = S.tut>=5 ? [miniLeft("raceAt"),miniLeft("lampAt")].filter(x=>x<=0).length : 0;
+  setH("gamesBtn", S.tut<5); setH("gBadge", !gReady); setT("gBadge", gReady);
+  if(openId==="gamesSheet") renderGames(true);
+  if(shopOpen){ updateShop(CLICK_UPS); updateShop(HELPERS); updateLook(); }
   tutRender();
 }
 function rebuild(){
@@ -888,7 +967,7 @@ function applyScene(){
   document.documentElement.style.setProperty("--bgimg", `url("${IMG_DIR+sc.bg}")`);
 }
 
-let last = performance.now(), saveAcc = 0, achAcc = 0, dayAcc = 0;
+let last = performance.now(), saveAcc = 0, achAcc = 0, dayAcc = 0, hudAcc = 0;
 function tick(now){
   const dt = clamp((now-last)/1000, 0, 1); last = now;
   if(!S.ended){
@@ -897,8 +976,8 @@ function tick(now){
   }
   saveAcc += dt; if(saveAcc>5){ saveAcc = 0; save(); }
   achAcc += dt; if(achAcc>1){ achAcc = 0; checkAch(); }
-  dayAcc += dt; if(dayAcc>10){ dayAcc = 0; ensureDaily(); }
-  render();
+  dayAcc += dt; if(dayAcc>10){ dayAcc = 0; ensureDaily(); maybeChest(); }
+  hudAcc += dt; if(hudAcc>=0.1){ hudAcc = 0; render(); }
   requestAnimationFrame(tick);
 }
 
@@ -916,7 +995,8 @@ const SHEET = { w:40, h:69, feet:67, anchor:20, walk:8, jump:8 };
 // onde fica a cabeça em cada imagem do personagem (para chapéus e óculos)
 const HEAD = { walkTop:[0,1,1,1,0,1,1,1,0], walkX:19, frente:{x:15,top:0}, tres:{x:11,top:0} };
 
-const stage = $("stage"), cv = $("scene"), cx = cv.getContext("2d");
+const stage = $("stage"), cv = $("scene"), cx = cv.getContext("2d", { alpha:false });
+let stageW = 0;
 const bg = new Image(); let bgReady = false;
 bg.addEventListener("load",()=>{ bgReady = true; });
 const SPRITES = {};
@@ -970,7 +1050,7 @@ function heroSay(text, d=3.2){ hero.say = text; hero.sayT = d; }
 function heroJump(){ if(hero.jy===0 && hero.vy===0){ hero.vy = JUMP_V; Sound.play("jump"); mission("jumps"); } }
 
 function resize(){
-  const cw = stage.clientWidth, ch = stage.clientHeight; if(!cw||!ch) return;
+  const cw = stage.clientWidth, ch = stage.clientHeight; stageW = cw; if(!cw||!ch) return;
   const A = cw/ch;
   if(A <= BG_W/BG_H){ H = BG_H; W = Math.round(BG_H*A); } else { W = BG_W; H = Math.round(BG_W/A); }
   cv.width = W; cv.height = H;
@@ -1052,7 +1132,7 @@ function comboHit(){
   return 1 + 0.25*Math.min(combo-1, 8);
 }
 function updateScene(dt){
-  const spd = buff.t>0 ? 1.5 : 1;
+  const spd = (buff.t>0 ? 1.5 : 1) * (obs.dirty>0 ? 0.55 : 1);
   let want = openId ? 0 : (keys.right?1:0)-(keys.left?1:0);
   let desired = want*MAX_SPEED*spd;
   if(want) hero.target = null;
@@ -1061,7 +1141,7 @@ function updateScene(dt){
     if(Math.abs(d)<0.004 && Math.abs(hero.vx)<0.02) hero.target = null;
     else desired = Math.sign(d)*Math.min(MAX_SPEED*spd, Math.abs(d)*4);
   }
-  hero.vx += (desired-hero.vx)*ease(hero.jy>0?4:9, dt);
+  hero.vx += (desired-hero.vx)*ease(hero.jy>0 ? 4 : obs.slip>0 ? 0.9 : 9, dt);
   if(Math.abs(hero.vx)<0.0005 && desired===0) hero.vx = 0;
   hero.x += hero.vx*dt;
   if(hero.x<MIN_X||hero.x>MAX_X){ hero.x = clamp(hero.x,MIN_X,MAX_X); hero.vx = 0; }
@@ -1090,8 +1170,10 @@ function updateScene(dt){
   // moedas
   tutUpdate();
   coinTimer -= dt;
-  if(S.tut>=2 && coinTimer<=0 && coins.length<4){ coinTimer = 2.5+Math.random()*2; spawnCoin(); }
-  if(S.tut>=5){ updateEvents(dt); updateInteractions(dt); updateOsvaldo(dt); }
+  const fast = req.on || lamp.on, maxC = lamp.on ? 10 : req.on ? 7 : 4;
+  if(S.tut>=2 && coinTimer<=0 && coins.length<maxC){ coinTimer = lamp.on ? 0.35 : req.on ? 0.8 : 2.5+Math.random()*2; spawnCoin(); }
+  if(S.tut>=5){ updateEvents(dt); updateInteractions(dt); updateOsvaldo(dt); updateObstacles(dt); updateRequest(dt); updateLamp(dt); }
+  updateObjective();
   updateHelpers(dt); updateValdemar(dt);
   const feet = GROUND-hero.jy, head = feet-HERO_H;
   for(let i=coins.length-1;i>=0;i--){
@@ -1111,7 +1193,9 @@ function updateScene(dt){
 }
 function collectCoin(c, cy){
   const cm = comboHit();
-  const v = Math.max(1, Math.round(coinValue()*(c.air?2:1)*(c.gold?10:1)*(c.night?2:1)*cm*(buff.t>0?1.5:1)));
+  const v = Math.max(1, Math.round(coinValue()*(c.air?2:1)*(c.gold?10:1)*(c.night?2:1)*(c.lamp?2:1)*cm*(buff.t>0?1.5:1)));
+  if(req.on) req.got++;
+  if(lamp.on) lamp.got++;
   S.money += v; coinsTotal += v; S.clicks++; S.life.coins++; mission("coins");
   if(c.gold){ S.life.gold++; mission("gold"); heroSay("MOEDA DOURADA!!"); }
   if(c.night){ S.life.night++; mission("night"); }
@@ -1212,23 +1296,26 @@ function drawLook(im, frame, anchor, feet, s, dy){
   }
 }
 function placeBubble(el, text, tleft, sx, top, minTop=6){
-  if(tleft<=0 || !text || (tleft<0.4 && Math.floor(tleft*20)%2)){ el.hidden = true; return; }
+  if(tleft<=0 || !text || (tleft<0.4 && Math.floor(tleft*20)%2)){ if(!el.hidden) el.hidden = true; return; }
   if(el.dataset.t !== text){ el.dataset.t = text; const i = text.indexOf(": ");
     if(i>0 && i<16){ el.innerHTML = ""; const b = document.createElement("b"); b.textContent = text.slice(0,i+1)+" "; el.append(b, text.slice(i+2)); } else el.textContent = text; }
-  el.hidden = false;
-  const k = stage.clientWidth / W, aw = stage.clientWidth, bw = el.offsetWidth, bh = el.offsetHeight;
+  if(el.hidden){ el.hidden = false; el._bw = 0; }
+  if(!el._bw || el._t !== text){ el._t = text; el._bw = el.offsetWidth; el._bh = el.offsetHeight; }
+  const aw = stageW, k = aw / W, bw = el._bw, bh = el._bh;
   const hx = sx*k, left = clamp(hx - bw/2, 6, aw - bw - 6), y = Math.max(minTop, top*k - bh - 10);
-  el.style.transform = `translate(${Math.round(left)}px, ${Math.round(y)}px)`;
-  el.style.setProperty("--tail", `${clamp(hx-left, 8, bw-8)}px`);
+  const tr = `translate(${Math.round(left)}px, ${Math.round(y)}px)`;
+  if(el._tr !== tr){ el._tr = tr; el.style.transform = tr; el.style.setProperty("--tail", `${Math.round(clamp(hx-left, 8, bw-8))}px`); }
 }
-function hudBottom(){ return document.querySelector(".hud-top").offsetHeight + 8; }
+let hudH = 0;
+new ResizeObserver(()=>{ hudH = document.querySelector(".hud-top").offsetHeight; }).observe(document.querySelector(".hud-top"));
+function hudBottom(){ return hudH + 8; }
 function drawBubbles(heroInfo){
   if(heroInfo) placeBubble($("bubble"), hero.say, hero.sayT, heroInfo.sx, heroInfo.top);
   const s = view.dw/BG_W, door = curScene().door;
   if(vald.on){ const [sx,sy] = toScreen(door.x, door.y); placeBubble($("vbubble"), "Sr. Valdemar: "+vald.say, vald.sayT, sx, sy-(AJ.valdemar_porta.naturalHeight||50)*s, hudBottom()); }
-  else $("vbubble").hidden = true;
+  else if(!$("vbubble").hidden) $("vbubble").hidden = true;
   if(osv.state!=="off"){ const [sx,sy] = toScreen(osv.x, GROUND); placeBubble($("obubble"), "Tio Osvaldo: "+osv.say, osv.sayT, sx, sy-60*s, hudBottom()); }
-  else $("obubble").hidden = true;
+  else if(!$("obubble").hidden) $("obubble").hidden = true;
   const [ax,ay] = toScreen(helperTalk.x, helperTalk.y); placeBubble($("abubble"), helperTalk.say, helperTalk.sayT, ax, ay, hudBottom());
 }
 function drawNight(n){
@@ -1258,13 +1345,13 @@ function sceneLoop(now){
   if(W && H){
     updateScene(dt); computeView();
     cx.setTransform(1,0,0,1,0,0); cx.imageSmoothingEnabled = false; cx.clearRect(0,0,W,H);
-    drawBackground(); drawConfetti();
-    drawProps(); drawValdemar(); drawRoamers(); drawOsvaldo(); drawFlag();
-    const heroInfo = drawHero();
-    drawFlyers();
+    drawBackground(); drawPuddle(); drawConfetti();
+    drawProps(); drawValdemar(); drawRoamers(); drawOsvaldo(); drawFlag(); drawToto();
+    const heroInfo = drawHero(); drawDirt(heroInfo);
+    drawFlyers(); drawWildPigeon();
     drawNight(nightAmt());
     coins.forEach(drawCoin);
-    drawIcons(); drawTutArrow();
+    drawIcons(); drawTutArrow(); drawLamp();
     if(flashT>0){ cx.fillStyle = `rgba(255,255,255,${(flashT/0.35).toFixed(2)})`; cx.fillRect(0,0,W,H); }
     drawBubbles(heroInfo);
   }
@@ -1493,16 +1580,17 @@ function drawOsvaldo(){
 function spawnCoin(rain=false){
   const air = Math.random()<(rain?0.5:0.4);
   coins.push({ x:MIN_X+0.04+Math.random()*(MAX_X-MIN_X-0.08), y:air?GROUND-0.17:GROUND-0.035, t:0, life:rain?12:18, drop:1, air,
-               gold:Math.random()<0.04, night:nightAmt()>0.6 });
+               gold:Math.random()<0.04, night:nightAmt()>0.6, lamp:lamp.on });
 }
 let rainNext = 80+Math.random()*50, rainT = 0, rainSpawn = 0;
 function updateEvents(dt){
   rainNext -= dt;
+  if(rainNext<=0 && rainT<=0 && (req.on || lamp.on)) rainNext = 20;
   if(rainNext<=0 && rainT<=0){ rainT = 10; rainCount = 0; rainNext = 110+Math.random()*70; if(!talk.cur) heroSay("Chuva de moedas!!"); Sound.play("rain"); $("eventBanner").hidden = false; }
   if(rainT>0){
     rainT -= dt; rainSpawn -= dt;
     if(rainSpawn<=0 && coins.length<14){ rainSpawn = 0.3; spawnCoin(true); }
-    if(rainT<=0) $("eventBanner").hidden = true;
+    if(rainT<=0){ $("eventBanner").hidden = true; makePuddle(); }
   }
 }
 function spawnPop(nx, ny, text, kind=""){
@@ -1511,6 +1599,304 @@ function spawnPop(nx, ny, text, kind=""){
   el.style.left = Math.round(sx*k)+"px"; el.style.top = Math.round(sy*k)+"px";
   $("app").appendChild(el); setTimeout(()=>el.remove(), 950);
 }
+
+
+/* ================================================================
+   OBSTÁCULOS: Totó do vizinho, pombo da praça e poça d'água
+   ================================================================ */
+const obs = { dirty:0, slip:0, slipSay:0 };
+const toto = { on:false, x:0, dir:1, frame:0, next:55+Math.random()*30, warn:0, hit:false, jumped:false };
+const wild = { on:false, x:0, dir:1, frame:0, next:40+Math.random()*30, dropped:false };
+const drops = [], splats = [], splash = [];
+let puddle = null;
+const TOTO_FRAMES = [];
+function totoFrame(i){
+  if(TOTO_FRAMES[i]!==undefined) return TOTO_FRAMES[i];
+  const src = AJ["dog"+i]; if(!ready(src)) return null;
+  const c = document.createElement("canvas"); c.width = src.naturalWidth; c.height = src.naturalHeight;
+  const x = c.getContext("2d"); x.drawImage(src,0,0);
+  try{
+    const d = x.getImageData(0,0,c.width,c.height), a = d.data;
+    for(let k=0;k<a.length;k+=4){ if(!a[k+3]) continue;
+      const l = (a[k]*0.3+a[k+1]*0.59+a[k+2]*0.11)/255;
+      if(l<0.16) continue;                                   // contorno continua escuro
+      a[k] = 70+l*120; a[k+1] = 66+l*110; a[k+2] = 80+l*130; } // pelo cinza-azulado
+    x.putImageData(d,0,0);
+  }catch(e){}
+  return TOTO_FRAMES[i] = c;
+}
+function drawCanvasSprite(c, nx, ny, flip){
+  if(!c) return;
+  const s = view.dw/BG_W, [sx,sy] = toScreen(nx, ny), w = Math.round(c.width*s), h = Math.round(c.height*s);
+  cx.save(); cx.translate(Math.round(sx), Math.round(sy)); if(flip) cx.scale(-1,1);
+  cx.drawImage(c, -Math.round(w/2), -h, w, h); cx.restore();
+}
+const POOP = pixArt([".ww.","wWWw","wWgw",".ww."], {w:"#e8e8e0",W:"#ffffff",g:"#9aa08c"});
+const SPLAT = pixArt(["w..w.w","wWWWWw",".wWgw."], {w:"#e8e8e0",W:"#ffffff",g:"#9aa08c"});
+function obstaclesFree(){ return !talk.cur && !vald.on && osv.state==="off" && !lamp.on && !openId && race.state!=="count" && !S.ended && $("intro").hidden; }
+function warnAt(side, text){
+  const el = $("warn"); el.textContent = text; el.hidden = false;
+  el.style.left = side<0 ? "8px" : ""; el.style.right = side>0 ? "8px" : "";
+  clearTimeout(warnAt.t); warnAt.t = setTimeout(()=>{ el.hidden = true; }, 1300);
+}
+function updateObstacles(dt){
+  obs.dirty = Math.max(0, obs.dirty-dt); obs.slip = Math.max(0, obs.slip-dt); obs.slipSay = Math.max(0, obs.slipSay-dt);
+  // --- Totó: corre de um lado ao outro comendo moedas do chão
+  if(!toto.on){
+    toto.next -= dt;
+    if(toto.next<=0 && obstaclesFree()){
+      toto.dir = Math.random()<0.5 ? 1 : -1; toto.x = toto.dir>0 ? -0.08 : 1.08; toto.warn = 1.2;
+      toto.on = true; toto.hit = false; toto.jumped = false; Sound.play("bark"); warnAt(-toto.dir, toto.dir>0 ? "◀ TOTÓ!" : "TOTÓ! ▶");
+    }
+  } else if(toto.warn>0){ toto.warn -= dt; }
+  else {
+    toto.x += toto.dir*0.34*dt; toto.frame += dt*14;
+    for(let i=coins.length-1;i>=0;i--){ const c = coins[i];
+      if(!c.air && c.drop===0 && !c.tut && Math.abs(c.x-toto.x)<0.02){ coins.splice(i,1); spawnPop(c.x, GROUND-0.06, "nhac!", ""); Sound.play("nhac"); } }
+    const near = Math.abs(hero.x-toto.x)<0.035;
+    if(near && hero.jy>0.035 && !toto.jumped && !toto.hit){
+      toto.jumped = true; const v = niceRound(Math.max(20*Math.pow(10,S.ng), income()*6));
+      S.money += v; S.life.dodges++; mission("toto"); spawnPop(hero.x, GROUND-0.32, "PULOU! +"+fmt(v), "gold"); Sound.play("gold"); checkAch();
+    } else if(near && hero.jy<0.02 && !toto.jumped && !toto.hit){
+      toto.hit = true; hero.hop = 1; hero.vx = toto.dir*0.25;
+      const v = Math.floor(Math.min(S.money*0.1, income()*20));
+      if(v>=1){ S.money -= v; spawnPop(hero.x, GROUND-0.32, "-"+fmt(v), ""); heroSay(`O Totó levou ${fmt(v)}! Da próxima vez eu pulo!`); }
+      else heroSay("O Totó lambeu meu tênis…");
+      Sound.play("bark");
+    }
+    if(toto.x<-0.12 || toto.x>1.12){ toto.on = false; toto.next = 50+Math.random()*45; }
+  }
+  // --- pombo da praça: solta uma "lembrancinha" na cabeça de quem fica parado
+  if(!wild.on){
+    wild.next -= dt;
+    if(wild.next<=0 && obstaclesFree()){ wild.on = true; wild.dropped = false; wild.dir = Math.random()<0.5 ? 1 : -1; wild.x = wild.dir>0 ? -0.06 : 1.06; Sound.play("pru"); }
+  } else {
+    wild.x += wild.dir*0.2*dt; wild.frame += dt*7;
+    if(!wild.dropped && Math.abs(wild.x-(hero.x+hero.vx*0.5))<0.02){ wild.dropped = true; drops.push({ x:wild.x, y:0.31, vy:0 }); }
+    if(wild.x<-0.1 || wild.x>1.1){ wild.on = false; wild.next = 35+Math.random()*35; }
+  }
+  for(let i=drops.length-1;i>=0;i--){ const d = drops[i]; d.vy += 1.3*dt; d.y += d.vy*dt;
+    const headY = GROUND-hero.jy-HERO_H*0.95;
+    if(d.y>=headY && d.y<headY+0.05 && Math.abs(d.x-hero.x)<0.03){
+      drops.splice(i,1); obs.dirty = 2.5; Sound.play("splat"); heroSay(pick(["ECA! Um pombo!","Isso dá sorte… dizem.","Justo hoje que lavei o cabelo!"]));
+      continue; }
+    if(d.y>=GROUND-0.01){ drops.splice(i,1); splats.push({ x:d.x, t:4 }); Sound.play("splat");
+      if(Math.abs(d.x-hero.x)<0.09 && !talk.cur) heroSay("Ufa! Passou raspando."); }
+  }
+  for(let i=splats.length-1;i>=0;i--){ splats[i].t -= dt; if(splats[i].t<=0) splats.splice(i,1); }
+  // --- poça: escorrega se passar correndo
+  if(puddle){
+    puddle.t -= dt; if(puddle.t<=0) puddle = null;
+    else if(hero.jy<0.01 && Math.abs(hero.x-puddle.x)<0.035 && Math.abs(hero.vx)>0.08 && obs.slip<=0){
+      obs.slip = 1.1; hero.vx *= 1.35; Sound.play("splat");
+      for(let k=0;k<8;k++) splash.push({ x:puddle.x+(Math.random()-.5)*0.03, y:GROUND-0.005, vx:(Math.random()-.5)*0.25, vy:-0.3-Math.random()*0.3, t:0.6 });
+      if(obs.slipSay<=0){ obs.slipSay = 8; heroSay(pick(["Escorregueeei!","Quem deixou essa poça aqui?!","Uoooou!"])); }
+    }
+  }
+  for(let i=splash.length-1;i>=0;i--){ const p = splash[i]; p.t -= dt; p.vy += 2*dt; p.x += p.vx*dt; p.y += p.vy*dt; if(p.t<=0) splash.splice(i,1); }
+}
+function makePuddle(){ puddle = { x:0.15+Math.random()*0.7, t:45 }; }
+function drawPuddle(){
+  if(puddle){ const [sx,sy] = toScreen(puddle.x, GROUND+0.01), a = Math.min(1, puddle.t/3);
+    pixEllipse(sx, sy, 13, 3, `rgba(70,140,200,${(0.75*a).toFixed(2)})`); pixEllipse(sx-3, sy-1, 5, 1, `rgba(200,235,255,${(0.8*a).toFixed(2)})`); }
+  for(const sp of splats){ const [sx,sy] = toScreen(sp.x, GROUND+0.005); if(sp.t>1 || Math.floor(sp.t*8)%2) cx.drawImage(SPLAT, Math.round(sx-4), Math.round(sy-2)); }
+  for(const d of drops){ const [sx,gy] = toScreen(d.x, GROUND), k = clamp((d.y-0.31)/(GROUND-0.31),0,1); drawShadow(sx, gy, 1+k*3, 0.15+k*0.25); }
+}
+function drawToto(){
+  if(!toto.on || toto.warn>0) return;
+  drawCanvasSprite(totoFrame(Math.floor(toto.frame)%4), toto.x, GROUND+0.005, toto.dir<0);
+}
+function drawWildPigeon(){
+  if(wild.on){ const im = AJ["pombo"+(Math.floor(wild.frame)%2)]; drawSprite(im, wild.x, 0.31 + Math.sin(wild.frame)*0.006, wild.dir<0); }
+  for(const d of drops){ const [sx,sy] = toScreen(d.x, d.y); cx.drawImage(POOP, Math.round(sx-3), Math.round(sy-3)); }
+  for(const p of splash){ const [sx,sy] = toScreen(p.x, p.y); cx.fillStyle = "#bfe4ff"; cx.fillRect(Math.round(sx), Math.round(sy), 1, 1); }
+}
+function drawDirt(info){
+  if(obs.dirty<=0 || !info) return;
+  const x = Math.round(info.sx), y = Math.round(info.top)+1;
+  cx.fillStyle = "#ffffff"; cx.fillRect(x-2,y,4,2); cx.fillRect(x-1,y+2,1,2); cx.fillStyle = "#9aa08c"; cx.fillRect(x,y+1,1,1);
+}
+
+/* ================================================================
+   PEDIDOS DO SR. VALDEMAR (desafio de 30 segundos)
+   ================================================================ */
+const req = { on:false, need:0, got:0, t:0, next:150+Math.random()*60 };
+const REQ_LINES = [
+  n=>[{who:"v",text:`Pedido urgente! Me traga ${n} moedas em 30 segundos!`},{who:"h",text:"Agora?!"},{who:"v",text:"Já está contando. Tic-tac."}],
+  n=>[{who:"v",text:`Preciso de ${n} moedas para o meu chá. Você tem 30 segundos.`},{who:"h",text:"Que chá caro!"},{who:"v",text:"É importado. Ande logo."}],
+  n=>[{who:"v",text:`Desafio: ${n} moedas em 30 segundos. Se cumprir, dou um desconto.`},{who:"h",text:"Desconto de verdade?"},{who:"v",text:"Palavra de agiota."}],
+];
+function updateRequest(dt){
+  if(!req.on){
+    req.next -= dt;
+    if(req.next<=0 && obstaclesFree() && rainT<=0){
+      req.next = 9999; const n = pick([8,10,12]);
+      queueScene(()=>valdemarScene(pick(REQ_LINES)(n), ()=>{ req.on = true; req.need = n; req.got = 0; req.t = 30; bigText("VALENDO!"); Sound.play("go"); }));
+    }
+    return;
+  }
+  req.t -= dt;
+  if(req.got>=req.need){
+    req.on = false; req.next = 180+Math.random()*90;
+    const disc = Math.min(niceRound(Math.max(100*Math.pow(10,S.ng), income()*60)), Math.max(0, remaining()-1));
+    S.paid += disc; S.life.reqs++; mission("pedido"); Sound.play("win"); bigText("PEDIDO ENTREGUE!");
+    queueScene(()=>valdemarScene([{who:"v",text:`Impressionante. Desconto de ${fmt(disc)} na dívida.`},{who:"h",text:"Viu? Sou rápido!"}]));
+    checkNotes(); checkAch(); save();
+  } else if(req.t<=0){
+    req.on = false; req.next = 180+Math.random()*90;
+    const fee = Math.floor(Math.min(S.money, niceRound(income()*10)));
+    S.money -= fee; Sound.play("fail");
+    queueScene(()=>valdemarScene([{who:"v",text:fee>=1 ? `Atrasou! Taxa de atraso: ${fmt(fee)}.` : "Atrasou! Vou anotar no caderninho."},{who:"h",text:"Ai, meu bolso…"}]));
+    save();
+  }
+}
+
+/* ================================================================
+   MINIJOGOS: corrida de tartarugas (aposta) e caça no escuro
+   ================================================================ */
+const MINI_CD = 120;
+const lamp = { on:false, t:0, got:0 };
+function miniLeft(k){ return Math.max(0, MINI_CD - (Date.now() - (S.mini && S.mini[k] || 0))/1000); }
+function fmtCd(s){ s = Math.ceil(s); return `${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`; }
+const GAMES = [
+  { k:"raceAt", img:"px_aj_tart0.png", name:"Corrida de Tartarugas", desc:"Aposte numa tartaruga. Se ela ganhar, você leva 3× a aposta. O Tio Osvaldo ficaria orgulhoso.", go:()=>openRace() },
+  { k:"lampAt", img:"px_frente.png",  name:"Caça no Escuro",        desc:"20 segundos com uma lanterna. Chovem moedas no escuro e cada uma vale o dobro.", go:()=>startLamp() },
+];
+function renderGames(soft){
+  const host = $("glist");
+  if(!soft || !host.children.length){
+    host.innerHTML = "";
+    GAMES.forEach(g=>{
+      const d = document.createElement("div"); d.className = "gcard";
+      const im = new Image(); im.alt = ""; im.src = IMG_DIR+g.img;
+      const t = document.createElement("div"); t.innerHTML = `<div class="nm">${g.name}</div><div class="ds">${g.desc}</div>`;
+      const b = document.createElement("button"); b.className = "btn pay"; b.dataset.k = g.k;
+      b.addEventListener("click",()=>{ if(miniLeft(g.k)>0) return; openPanel(null); g.go(); });
+      d.append(im, t, b); host.appendChild(d);
+    });
+  }
+  host.querySelectorAll("button").forEach(b=>{
+    const left = miniLeft(b.dataset.k), busy = lamp.on || req.on;
+    b.disabled = left>0 || busy;
+    const txt = left>0 ? `Disponível em ${fmtCd(left)}` : busy ? "Termine o desafio atual" : "Jogar";
+    if(b.textContent!==txt) b.textContent = txt;
+  });
+}
+// ---- caça no escuro
+function startLamp(){
+  S.mini.lampAt = Date.now(); lamp.on = true; lamp.t = 20; lamp.got = 0; coinTimer = 0.3;
+  S.life.minis++; mission("mini"); bigText("CAÇA NO ESCURO!"); Sound.play("go"); save();
+}
+function updateLamp(dt){
+  if(!lamp.on) return;
+  lamp.t -= dt;
+  if(lamp.t<=0){
+    lamp.on = false; for(let i=coins.length-1;i>=0;i--) if(coins[i].lamp) coins.splice(i,1);
+    S.life.lampBest = Math.max(S.life.lampBest, lamp.got); bigText(`${lamp.got} MOEDAS!`); Sound.play("win");
+    heroSay(lamp.got>=15 ? "Enxergo no escuro igual gato!" : lamp.got>=8 ? "Nada mal pra quem não enxerga nada!" : "Cadê as moedas? Cadê EU?");
+    checkAch(); save();
+  }
+}
+function drawLamp(){
+  if(!lamp.on) return;
+  const [hx,hy] = toScreen(hero.x, GROUND-hero.jy-HERO_H*0.45), r = Math.round(30*view.dw/BG_W);
+  cx.save(); cx.fillStyle = "rgba(6,8,20,0.94)"; cx.beginPath(); cx.rect(0,0,W,H); cx.arc(hx, hy, r, 0, Math.PI*2, true); cx.fill();
+  cx.strokeStyle = "rgba(255,230,140,.35)"; cx.lineWidth = 2; cx.beginPath(); cx.arc(hx, hy, r, 0, Math.PI*2); cx.stroke(); cx.restore();
+  const t = performance.now()/1000;
+  for(const c of coins){ const [sx,sy] = toScreen(c.x, c.y); if(Math.hypot(sx-hx, sy-hy)<r) continue;
+    if(Math.sin(t*6 + c.x*50)>0.3){ cx.fillStyle = "#ffe58a"; cx.fillRect(Math.round(sx), Math.round(sy), 1, 1); } }
+}
+// ---- corrida de tartarugas
+const RACERS = [ { n:"Relâmpago", f:"none" }, { n:"Lesminha", f:"hue-rotate(110deg)" }, { n:"Turbo", f:"hue-rotate(220deg) saturate(1.4)" } ];
+const rc = { pick:0, betPct:0.1, running:false, pos:[0,0,0], spd:[0,0,0], next:0, raf:0, last:0 };
+function betValue(){ return Math.floor(S.money*rc.betPct); }
+function openRace(){
+  const tr = $("track"); tr.innerHTML = "";
+  RACERS.forEach((r,i)=>{ const l = document.createElement("div"); l.className = "lane";
+    const im = new Image(); im.alt = r.n; im.src = IMG_DIR+"px_aj_tart0.png"; im.style.filter = r.f; im.id = "rt"+i;
+    const n = document.createElement("span"); n.className = "ln"; n.textContent = i+1; l.append(n, im); tr.appendChild(l); });
+  const pk = $("racePick"); pk.innerHTML = "";
+  RACERS.forEach((r,i)=>{ const b = document.createElement("button"); b.className = "btn"; b.textContent = `${i+1}. ${r.n}`; b.addEventListener("click",()=>{ rc.pick = i; raceUI(); }); pk.appendChild(b); });
+  const bt = $("raceBet"); bt.innerHTML = "";
+  [0.1,0.25,0.5].forEach(p=>{ const b = document.createElement("button"); b.className = "btn"; b.dataset.p = p; b.addEventListener("click",()=>{ rc.betPct = p; raceUI(); }); bt.appendChild(b); });
+  rc.pos = [0,0,0]; rc.running = false; $("raceCount").textContent = ""; $("raceGo").hidden = false;
+  $("raceMsg").textContent = "Escolha a tartaruga e quanto apostar. Se ela ganhar, você recebe 3× a aposta!";
+  $("raceModal").hidden = false; raceUI(); placeTurtles();
+}
+function raceUI(){
+  [...$("racePick").children].forEach((b,i)=>{ b.classList.toggle("sel", i===rc.pick); b.disabled = rc.running; });
+  [...$("raceBet").children].forEach(b=>{ const p = +b.dataset.p; b.textContent = `${Math.round(p*100)}% · ${fmtShort(Math.floor(S.money*p))}`; b.classList.toggle("sel", p===rc.betPct); b.disabled = rc.running; });
+  $("raceGo").disabled = rc.running || betValue()<1; $("raceClose").disabled = rc.running;
+}
+function placeTurtles(){
+  const tr = $("track"), w = tr.clientWidth - 30 - 14 - 40;
+  rc.pos.forEach((p,i)=>{ const im = $("rt"+i); if(im){ im.style.transform = `translateX(${Math.round(p*w)}px)`; im.src = IMG_DIR+"px_aj_tart"+(rc.running && Math.floor(performance.now()/120+i)%2 ? 1 : 0)+".png"; } });
+}
+$("raceGo").addEventListener("click",()=>{
+  const bet = betValue(); if(rc.running || bet<1 || S.money<bet) return;
+  S.money -= bet; rc.bet = bet; rc.running = true; S.mini.raceAt = Date.now(); S.life.minis++; mission("mini"); save(); render(); raceUI();
+  $("raceGo").hidden = true; $("raceMsg").textContent = `Você apostou ${fmt(bet)} na ${RACERS[rc.pick].n}.`;
+  let c = 3; $("raceCount").textContent = c; Sound.play("beep");
+  const iv = setInterval(()=>{ c--; if(c>0){ $("raceCount").textContent = c; Sound.play("beep"); }
+    else { clearInterval(iv); $("raceCount").textContent = "JÁ!"; Sound.play("go"); rc.last = performance.now(); rc.next = 0; rc.raf = requestAnimationFrame(raceStep); } }, 700);
+});
+function raceStep(now){
+  const dt = Math.min(0.05, (now-rc.last)/1000); rc.last = now;
+  rc.next -= dt; if(rc.next<=0){ rc.next = 0.4; rc.spd = rc.spd.map(()=>0.07+Math.random()*0.16); }
+  let win = -1;
+  rc.pos = rc.pos.map((p,i)=>{ const q = Math.min(1, p+rc.spd[i]*dt); if(q>=1 && win<0) win = i; return q; });
+  placeTurtles();
+  if(win<0){ rc.raf = requestAnimationFrame(raceStep); return; }
+  rc.running = false; $("raceCount").textContent = `${RACERS[win].n} venceu!`;
+  if(win===rc.pick){ const v = rc.bet*3; S.money += v; S.life.betWins++; Sound.play("win"); $("raceMsg").textContent = `Você ganhou ${fmt(v)}! O Tio Osvaldo mandou um beijo da ilha.`; }
+  else { Sound.play("fail"); $("raceMsg").textContent = `Perdeu ${fmt(rc.bet)}… Agora você entende o Tio Osvaldo.`; }
+  checkAch(); save(); render(); raceUI();
+}
+$("raceClose").addEventListener("click",()=>{ if(rc.running) return; $("raceModal").hidden = true; });
+window.addEventListener("resize",()=>{ if(!$("raceModal").hidden) placeTurtles(); });
+
+// ---- texto do objetivo na tela
+function updateObjective(){
+  let t = "", hurry = false;
+  if(req.on){ t = `📦 PEDIDO: ${Math.min(req.got,req.need)}/${req.need} · ${Math.max(0,Math.ceil(req.t))}s`; hurry = req.t<8; }
+  else if(lamp.on){ t = `🔦 ESCURO: ${lamp.got} moedas · ${Math.max(0,Math.ceil(lamp.t))}s`; hurry = lamp.t<5; }
+  setH("objective", !t); if(t) setT("objective", t);
+  if(domCache.hurry!==hurry){ domCache.hurry = hurry; $("objective").classList.toggle("hurry", hurry); }
+}
+
+/* ================================================================
+   BAÚ DO DIA E SEQUÊNCIA DE DIAS
+   ================================================================ */
+const CHEST = [ {s:60,min:50}, {s:90,min:100}, {s:120,min:150}, {s:180,min:250}, {s:240,min:400}, {s:300,min:600}, {s:600,min:1500} ];
+function dayStr(off=0){ const d = new Date(); d.setDate(d.getDate()+off); return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`; }
+let chestPending = null;
+function maybeChest(){
+  if(S.tut<5 || S.ended || !$("offline").hidden || !$("intro").hidden || !$("chest").hidden || !$("ending").hidden) return;
+  if(!S.streak) S.streak = { last:"", n:0 };
+  if(S.streak.last===dayStr()) return;
+  const n = S.streak.last===dayStr(-1) ? S.streak.n+1 : 1, broke = n===1 && S.streak.n>1;
+  const c = CHEST[(n-1)%7], v = Math.max(c.min*Math.pow(10,S.ng), niceRound(income()*c.s));
+  chestPending = { n, v, big:(n-1)%7===6 };
+  const row = $("streakRow"); row.innerHTML = "";
+  const cyc = (n-1)%7;
+  for(let i=0;i<7;i++){ const d = document.createElement("div"); d.className = i<cyc ? "done" : i===cyc ? "now" : ""; d.textContent = i===6 ? "🎁" : `Dia ${i+1}`; row.appendChild(d); }
+  const ic = $("chestIcon"); ic.innerHTML = ""; ic.className = "chestbig"; ic.appendChild(emojiImg("🎁"));
+  $("chestTitle").textContent = `Baú do dia · ${n} ${n>1?"dias seguidos":"dia"}`;
+  $("chestText").textContent = broke ? `Sua sequência de ${S.streak.n} dias zerou… mas o baú de hoje está aqui!` : chestPending.big ? "Dia 7: baú gigante com chuva de moedas douradas!" : "Volte amanhã para o baú ficar ainda melhor.";
+  $("chestBtn").textContent = "Abrir o baú"; $("chest").hidden = false; $("chestBtn").focus();
+}
+$("chestBtn").addEventListener("click",()=>{
+  const p = chestPending;
+  if(p){
+    chestPending = null; S.money += p.v; S.streak = { last:dayStr(), n:p.n }; S.life.streakBest = Math.max(S.life.streakBest, p.n);
+    const ic = $("chestIcon"); ic.innerHTML = ""; ic.appendChild(emojiImg(p.big ? "💰" : "🪙")); ic.classList.add("shake");
+    $("chestText").textContent = `Você ganhou ${fmt(p.v)}!` + (p.big ? " E tem moeda dourada caindo lá fora!" : "");
+    $("chestBtn").textContent = "Valeu!"; Sound.play("chest");
+    if(p.big) setTimeout(osvaldoGift, 400);
+    checkAch(); render(); save(); return;
+  }
+  $("chest").hidden = true;
+});
 
 /* ================================================================
    TUTORIAL (primeira vez)
@@ -1537,9 +1923,9 @@ function tutOnCoin(){ if(S.tut<2){ S.tut++; Sound.play("level"); save(); } }
 function tutOnPanel(id){ if(S.tut===2 && id==="sheet"){ S.tut = 3; setTab("tabUp"); save(); } }
 function tutOnBuy(item){
   if(S.tut===3 && item.id==="tenis"){ S.tut = 4; save();
-    clearTimeout(tutTimer); tutTimer = setTimeout(()=>{ if(S.tut===4){ S.tut = 5; save(); heroSay("Agora é com você! Bora pagar essa dívida."); } }, 7000); }
+    clearTimeout(tutTimer); tutTimer = setTimeout(()=>{ if(S.tut===4){ S.tut = 5; save(); heroSay("Agora é com você! Bora pagar essa dívida."); setTimeout(maybeChest, 4000); } }, 7000); }
 }
-function tutOnPay(){ if(S.tut===4){ S.tut = 5; save(); } }
+function tutOnPay(){ if(S.tut===4){ S.tut = 5; save(); setTimeout(maybeChest, 4000); } }
 function tutRender(){
   const t = S.tut, hint = $("stageHint");
   let text = t<5 ? TUT_TEXT[t] : "";
@@ -1605,6 +1991,11 @@ const Sound = (()=>{
     photo:t=>{ noise(t,.05,.6); tone(2200,t+.02,.06,"square",.3); },
     beep: t=>tone(880,t,.12,"square",.6),
     go:   t=>tone(1320,t,.35,"square",.7),
+    nhac: t=>{ tone(300,t,.06,"square",.5,sfx,180); tone(300,t+.09,.06,"square",.5,sfx,180); },
+    pru:  t=>{ tone(420,t,.12,"triangle",.8,sfx,330); tone(440,t+.16,.18,"triangle",.8,sfx,320); },
+    splat:t=>{ noise(t,.12,.6); tone(180,t,.15,"square",.5,sfx,90); },
+    fail: t=>{ [392,330,262].forEach((f,i)=>tone(f,t+i*.14,.2,"triangle",1)); },
+    chest:t=>{ noise(t,.06,.4); [523,784,1047,1568,2093].forEach((f,i)=>tone(f,t+.08+i*.07,.16,"square",.6)); },
     win:  t=>{ [523,659,784,1047,784,1047,1319].forEach((f,i)=>tone(f,t+i*.12,.22,"square",.8)); },
   };
   const LEAD = [659,0,784,0,880,784,659,0, 587,0,659,0,523,0,0,0, 659,0,784,0,880,988,1047,0, 988,880,784,659,784,0,0,0];
@@ -1623,11 +2014,15 @@ const Sound = (()=>{
     }, 60);
   }
   function setVol(m, s){ S.vol = { music:m, sfx:s }; apply(); save(); }
-  return { init, play, startMusic, setVol };
+  return { init, play, startMusic, setVol, running:()=>!!(ac && timer && ac.state==="running") };
 })();
-function unlockAudio(){ Sound.init(); Sound.startMusic(); }
+function unlockAudio(){
+  Sound.init(); Sound.startMusic();
+  if(Sound.running()){ window.removeEventListener("pointerdown", unlockAudio); window.removeEventListener("keydown", unlockAudio); }
+}
 window.addEventListener("pointerdown", unlockAudio);
 window.addEventListener("keydown", unlockAudio);
+document.addEventListener("visibilitychange",()=>{ if(!document.hidden) Sound.init(); });
 
 /* ================================================================
    INÍCIO
@@ -1635,7 +2030,9 @@ window.addEventListener("keydown", unlockAudio);
 if(S.paid>0 || S.money>0 || S.clicks>0) $("startBtn").textContent = "CONTINUAR";
 // no app instalado, esconde a barra de notificações do celular
 function goFullscreen(){
-  const installed = matchMedia("(display-mode: standalone)").matches || matchMedia("(display-mode: fullscreen)").matches || document.referrer.startsWith("android-app://");
+  document.removeEventListener("pointerdown", goFullscreen);
+  if(matchMedia("(display-mode: fullscreen)").matches) return;
+  const installed = matchMedia("(display-mode: standalone)").matches || document.referrer.startsWith("android-app://");
   const el = document.documentElement;
   if(installed && !document.fullscreenElement && el.requestFullscreen) el.requestFullscreen({ navigationUI:"hide" }).catch(()=>{});
 }
@@ -1644,6 +2041,7 @@ $("startBtn").addEventListener("click", ()=>{
   unlockAudio(); $("intro").hidden = true; stage.focus();
   if(S.tut>=5) setTimeout(()=>heroSay(S.clicks ? "De volta ao trabalho!" : "Um milhão… bora catar moeda!"), 300);
   offlineCheck(awaySince); awaySince = Date.now();
+  setTimeout(maybeChest, 700);
 });
 if("serviceWorker" in navigator && (location.protocol==="https:" || location.hostname==="localhost") && !/claude|anthropic/.test(location.hostname)){
   navigator.serviceWorker.register("sw.js").catch(()=>{});
