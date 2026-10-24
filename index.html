@@ -1957,7 +1957,7 @@ const Sound = (()=>{
   let ac = null, sfx, music, timer = null, nextT = 0, step = 0;
   const vol = ()=>S.vol || {music:60,sfx:80};
   function init(){
-    if(ac){ if(ac.state==="suspended") ac.resume(); return; }
+    if(ac){ if(ac.state==="suspended" && !document.hidden) ac.resume(); return; }
     const AC = window.AudioContext || window.webkitAudioContext; if(!AC) return;
     ac = new AC();
     sfx = ac.createGain(); sfx.connect(ac.destination);
@@ -2014,7 +2014,8 @@ const Sound = (()=>{
     }, 60);
   }
   function setVol(m, s){ S.vol = { music:m, sfx:s }; apply(); save(); }
-  return { init, play, startMusic, setVol, running:()=>!!(ac && timer && ac.state==="running") };
+  function pause(){ if(ac && ac.state==="running") ac.suspend().catch(()=>{}); }
+  return { init, play, startMusic, setVol, pause, running:()=>!!(ac && timer && ac.state==="running") };
 })();
 function unlockAudio(){
   Sound.init(); Sound.startMusic();
@@ -2022,7 +2023,10 @@ function unlockAudio(){
 }
 window.addEventListener("pointerdown", unlockAudio);
 window.addEventListener("keydown", unlockAudio);
-document.addEventListener("visibilitychange",()=>{ if(!document.hidden) Sound.init(); });
+function audioPause(){ Sound.pause(); }
+document.addEventListener("visibilitychange",()=>{ if(document.hidden) audioPause(); else Sound.init(); });
+window.addEventListener("pagehide", audioPause);
+document.addEventListener("freeze", audioPause);
 
 /* ================================================================
    INÍCIO
@@ -2043,7 +2047,7 @@ $("startBtn").addEventListener("click", ()=>{
   offlineCheck(awaySince); awaySince = Date.now();
   setTimeout(maybeChest, 700);
 });
-if("serviceWorker" in navigator && (location.protocol==="https:" || location.hostname==="localhost") && !/claude|anthropic/.test(location.hostname)){
+if("serviceWorker" in navigator && (location.protocol==="https:" || location.hostname==="localhost") && !/claude|anthropic|appassets\.androidplatform/.test(location.hostname)){
   navigator.serviceWorker.register("sw.js").catch(()=>{});
 }
 applyScene(); ensureDaily(); rebuild(); checkAch();
