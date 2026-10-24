@@ -414,7 +414,7 @@ jobs:
         env:
           KS_FILE: ${{ github.workspace }}/app-build/chave.keystore
           KS_PASS: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_PASS: ${{ secrets.KEY_PASSWORD }}
+          KEY_PASS: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         run: |
           cd app-build
