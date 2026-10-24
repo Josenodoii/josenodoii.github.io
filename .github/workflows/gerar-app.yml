@@ -423,6 +423,16 @@ jobs:
           cp app/build/outputs/apk/release/app-release.apk ../saida/Devendo.apk
           cp app/build/outputs/bundle/release/app-release.aab ../saida/Devendo.aab
 
+      - name: Publicar o APK no site (para baixar direto no celular)
+        run: |
+          mkdir -p app
+          cp saida/Devendo.apk app/Devendo.apk
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/Devendo.apk
+          git commit -m "Novo APK do app (versão ${{ inputs.versao }})"
+          git push
+
       - uses: actions/upload-artifact@v4
         with:
           name: Devendo-app
